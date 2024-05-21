@@ -5,17 +5,13 @@ using namespace std;
 class Rope
 {
 private:
-   /* data */
+   Rope* parent;
+   Rope* left;
+   Rope* right;
+   char* str;
+   int lCount;
 public:
    Rope(/* args */);
    ~Rope();
 };
-
-Rope::Rope(/* args */)
-{
-}
-
-Rope::~Rope()
-{
-}
 
