@@ -64,5 +64,13 @@
     "vector": "cpp",
     "algorithm": "cpp"
   },
-  "C_Cpp.errorSquiggles": "enabled"
+  "C_Cpp.errorSquiggles": "enabled",
+  "makefile.launchConfigurations": [
+    {
+      "cwd": "/Users/purvpatel/Desktop/src/C++/Text-Editor",
+      "binaryPath": "/Users/purvpatel/Desktop/src/C++/Text-Editor/main.out",
+      "binaryArgs": []
+    }
+  ],
+  "C_Cpp.default.compilerPath": "/usr/bin/g++"
 }

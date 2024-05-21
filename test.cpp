@@ -4,6 +4,6 @@
 
 using namespace std;
 
-TEST(test, test){
+TEST(Rope, test){
    cout << "PASSED" << endl;
 }
