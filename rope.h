@@ -1,40 +1,50 @@
 #pragma once
 
-using namespace std;
+#include "Node.h"
 
-struct Node
-{
-   Node *left;
-   Node *right;
-   Node *parent;
-   char *str;
-   int lCount;
-   int height;
-};
+using namespace std;
 
 class Rope
 {
 private:
-   int Max_Len = 4;
-   Node *root;
-   Node *curr;
-   int capacity;
-   int size;
+   unique_ptr<Node> root;
 
    void rebalance();
    void addNode();
 
 public:
+   // Constructors
+
+   // Default constructor - produces a rope representing the empty string
    Rope();
-   Rope(string s);
-   ~Rope();
-   void insert(string s);
-   void insert(int i, string s);
-   char index(int i);
-   void concat(Rope *S, bool before);
-   pair<Rope *, Rope *> split(int i);
-   void del(int i, int j);
-   string getString();
-   string getString(int i);
-   string getString(int i, int j);
+   // Construct a rope from the given string
+   Rope(const string &);
+   // Copy constructor
+   Rope(const Rope &);
+
+   // Accessors
+
+   // Get the string stored in the rope
+   string toString() const;
+   // Get the length of the stored string
+   int length() const;
+   // Get the character at the given position in the represented string
+   char at(int index) const;
+   // Return the substring of length (len) beginning at the specified index
+   string substring(int start, int len) const;
+   // Determine if rope is balanced
+   bool isBalanced() const;
+   // Balance the rope
+   void balance(void);
+
+   // Mutator
+
+   // Insert the given string/rope into the rope, beginning at the specified index (i)
+   void insert(int i, const string &str);
+   void insert(int i, const Rope &r);
+   // Concatenate the existing string/rope with the argument
+   void append(const string &);
+   void append(const Rope &);
+   // Delete the substring of (len) characters beginning at index (start)
+   void rdelete(int start, int len);
 };
