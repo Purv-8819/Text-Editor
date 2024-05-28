@@ -3,17 +3,61 @@
 
 Rope::Rope()
 {
-    this->parent = nullptr;
-    this->left = nullptr;
+    this->root = new Node;
+    this->root->height = 0;
+    // space for 4 characters
+    this->root->str = new char[this->Max_Len];
+    this->root->lCount = 0;
+    // set capacity and size
+    this->capacity = 1;
+    this->size = 1;
+}
+
+Rope::Rope(string s)
+{
+    Rope();
+    this->insert(s);
 }
 
 Rope::~Rope()
 {
+    // Travers child first
+    // Free char pointer
+    // Free node poiner
 }
 
-int Rope::test()
+/// @brief Rebalance the tree
+void Rope::rebalance()
 {
-    return this->lCount;
+}
+
+/// @brief Add the next in line sibling node
+void Rope::addNode()
+{
+}
+
+/// @brief insert the string S to the beginning
+/// @param S string to be inserted
+void Rope::insert(string S)
+{
+    Node *curr = this->root;
+    // loop throuhg each character in string
+    for (int i = 0; i < S.size(); i++)
+    {
+        // if current node has space add character
+        if (this->curr->lCount < 4)
+        {
+            this->curr->str[this->curr->lCount] = S[i];
+        }
+        else
+        {
+            // else add sibling
+
+            // if no space for sibling travel up ancestors till space for sibling
+            // root reached, add new root with current root as left
+            // Re-balance
+        }
+    }
 }
 
 /// @brief insert the string S beginning at position i in the rope-string
