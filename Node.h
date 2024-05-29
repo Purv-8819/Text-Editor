@@ -12,8 +12,6 @@ private:
    string frag;
    int weight;
 
-   bool isLeaf() const;
-
 public:
    // Constructor
 
@@ -32,8 +30,12 @@ public:
    // Get string contained in current node and its children
    string treeToString() const;
 
+   // Mutator
+   friend pair<unique_ptr<Node>, unique_ptr<Node>> splitAt(unique_ptr<Node>, int);
+
    // Helper
    // Used in balancing
+   bool isLeaf() const;
    int getDepth() const;
-   void getLeaves(std::vector<Node *> &v);
+   void getLeaves(vector<Node *> &v);
 };
