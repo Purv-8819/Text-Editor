@@ -1,19 +1,22 @@
 #include "Node.h"
+#include <vector>
+#include <memory>
 
 /// @brief Construct internal Node from two given nodes
 /// @param l Left Child of the internal node
 /// @param r Rigjt Child of the internal node
-Node::Node(unique_ptr<Node> l, unique_ptr<Node> r)
+Node::Node(std::unique_ptr<Node> l, std::unique_ptr<Node> r)
 {
-   this->left = move(l);
-   this->right = move(r);
+
+   this->left = std::move(l);
+   this->right = std::move(r);
 
    this->weight = this->left->getLength();
 }
 
 /// @brief Construct leaft Node containing given string
 /// @param s the string to be held in the node
-Node::Node(string &s)
+Node::Node(const string &s)
 {
    this->left = nullptr;
    this->right = nullptr;
@@ -23,7 +26,7 @@ Node::Node(string &s)
 
 /// @brief Copy Constructor
 /// @param n Node to be copied
-Node::Node(Node &n)
+Node::Node(const Node &n)
 {
    this->frag = n.frag;
    this->weight = n.weight;
@@ -137,18 +140,19 @@ string Node::treeToString() const
 /// @param n the "root" node
 /// @param i the index to split at
 /// @return a pair of 2 ropes
-pair<unique_ptr<Node>, unique_ptr<Node>> splitAt(unique_ptr<Node> n, int i)
+using uniq = std::unique_ptr<Node>;
+
+pair<uniq, uniq> splitAt(unique_ptr<Node> n, int i)
 {
-   using uniq = unique_ptr<Node>;
 
    if (n->isLeaf())
    {
       return pair<uniq, uniq>{
           make_unique<Node>(n->frag.substr(0, i)),
-          make_unique<Node>(n->frag.substr(i))};
+          make_unique<Node>(n->frag.substr(i, n->weight - i))};
    }
 
-   uniq oldRight = move(n->right);
+   uniq oldRight = std::move(n->right);
    // Split happens in left half
    if (i < n->weight)
    {
@@ -157,32 +161,32 @@ pair<unique_ptr<Node>, unique_ptr<Node>> splitAt(unique_ptr<Node> n, int i)
       n->weight = i;
 
       // Split the left at index
-      pair<uniq, uniq> splitLeft = splitAt(move(n->left), i);
+      std::pair<uniq, uniq> splitLeft = splitAt(std::move(n->left), i);
       // The first half is the left child of node
-      n->left = move(splitLeft.first);
+      n->left = std::move(splitLeft.first);
       // The second half combined with old right is the right half of split
       return pair<uniq, uniq>{
-          move(n),
-          make_unique<Node>(splitLeft.second, oldRight)};
+          std::move(n),
+          make_unique<Node>(std::move(splitLeft.second), std::move(oldRight))};
    }
    else if (n->weight < i) // Split occurs in right half
    {
       // Split the right half accordingly
-      pair<uniq, uniq> splitRight = splitAt(move(oldRight), i - n->weight);
+      pair<uniq, uniq> splitRight = splitAt(std::move(oldRight), i - n->weight);
 
       // Right child is the front half of the split
-      n->right = move(splitRight.first);
+      n->right = std::move(splitRight.first);
 
       // Return the node, and the second half of the split
       return pair<uniq, uniq>{
-          move(n),
-          move(splitRight.second)};
+          std::move(n),
+          std::move(splitRight.second)};
    }
    else // Split right down middle
    {
       return pair<uniq, uniq>{
-          move(n->left),
-          move(n->right)};
+          std::move(n->left),
+          std::move(n->right)};
    }
 }
 

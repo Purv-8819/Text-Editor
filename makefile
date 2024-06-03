@@ -1,5 +1,5 @@
 build: main.cpp rope.cpp
-	g++ -std=c++11 -O2 -Wall -I. -g -std=c++2a Rope.cpp main.cpp -o main.out
+	g++ -std=c++14 -O2 -Wall -I. -g -std=c++2a Node.cpp Rope.cpp main.cpp -o main.out
 
 run:
 	./main.out

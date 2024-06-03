@@ -18,9 +18,9 @@ public:
    // Default constructor - produces a rope representing the empty string
    Rope();
    // Construct a rope from the given string
-   Rope(const string &);
+   Rope(const string &str);
    // Copy constructor
-   Rope(const Rope &);
+   Rope(const Rope &r);
 
    // Accessors
 
@@ -35,7 +35,7 @@ public:
    // Determine if rope is balanced
    bool isBalanced() const;
    // Balance the rope
-   void balance(void);
+   void balance();
 
    // Mutator
 
@@ -43,8 +43,8 @@ public:
    void insert(int i, const string &str);
    void insert(int i, const Rope &r);
    // Concatenate the existing string/rope with the argument
-   void append(const string &);
-   void append(const Rope &);
+   void append(const string &s);
+   void append(const Rope &r);
    // Delete the substring of (len) characters beginning at index (start)
    void rdelete(int start, int len);
 };

@@ -62,7 +62,8 @@
     "unordered_set": "cpp",
     "variant": "cpp",
     "vector": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "execution": "cpp"
   },
   "C_Cpp.errorSquiggles": "enabled",
   "makefile.launchConfigurations": [

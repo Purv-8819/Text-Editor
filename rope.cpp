@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include "Rope.h"
 
 Rope::Rope()
@@ -68,12 +69,12 @@ void Rope::insert(int i, const Rope &r)
 
    Rope tmp = Rope(r);
    // Split rope by where insertion needs to be made
-   pair<uniq, uniq> origSplit = splitAt(move(this->root), i);
+   pair<uniq, uniq> origSplit = splitAt(std::move(this->root), i);
    // Concat the first half to inssertion
-   uniq middleConcat = make_unique<Node>(move(origSplit.first), move(tmp.root));
+   uniq middleConcat = make_unique<Node>(std::move(origSplit.first), std::move(tmp.root));
 
    // Concat the end
-   this->root = make_unique<Node>(move(middleConcat), move(origSplit.second));
+   this->root = make_unique<Node>(std::move(middleConcat), std::move(origSplit.second));
 }
 
 /// @brief Append the given string at the end
@@ -89,7 +90,7 @@ void Rope::append(const string &str)
 void Rope::append(const Rope &r)
 {
    Rope temp = Rope(r);
-   this->root = make_unique<Node>(move(this->root), move(temp.root));
+   this->root = make_unique<Node>(std::move(this->root), std::move(temp.root));
 }
 
 // Determine if rope is balanced
@@ -99,4 +100,5 @@ void Rope::append(const Rope &r)
 //   the nth fibonacci number i.e. in the set {1,1,2,3,5,8,etc...}
 bool Rope::isBalanced(void) const
 {
+   return false;
 }

@@ -1,12 +1,11 @@
 #include <iostream>
-#include "Rope.h"
 
 using namespace std;
 
 int main()
 {
-   Rope *r = new Rope();
-   cout << "Hello There" << endl;
+   // Rope *r = new Rope();
+   cout << "Hello World" << endl;
 
    return 0;
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 using namespace std;
@@ -18,9 +19,9 @@ public:
    // Construct internal node from 2 other nodes
    Node(unique_ptr<Node> l, unique_ptr<Node> r);
    // Construct leaf node with string
-   Node(string &s);
+   Node(const string &s);
    // Copy Constructor
-   Node(Node &);
+   Node(const Node &n);
 
    // Accessors
    int getLength() const;
@@ -30,8 +31,9 @@ public:
    // Get string contained in current node and its children
    string treeToString() const;
 
+   using uniq = unique_ptr<Node>;
    // Mutator
-   friend pair<unique_ptr<Node>, unique_ptr<Node>> splitAt(unique_ptr<Node>, int);
+   friend pair<uniq, uniq> splitAt(uniq n, int i);
 
    // Helper
    // Used in balancing
