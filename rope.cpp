@@ -1,6 +1,6 @@
-#include <iostream>
-#include <memory>
 #include "Rope.h"
+
+using namespace std;
 
 Rope::Rope()
 {
@@ -101,4 +101,44 @@ void Rope::append(const Rope &r)
 bool Rope::isBalanced(void) const
 {
    return false;
+}
+
+/// @brief Gets the nth Fibonacci number
+/// @param n the number to get
+/// @return Fibonacci number at nth spot
+int Rope::fib(int n)
+{
+   if (n == 0)
+   {
+      return 0;
+   }
+   int a = 0;
+   int b = 1;
+   int sum;
+   for (int i = 2; i < n; i++)
+   {
+      sum = a + b;
+      a = b;
+      b = sum;
+   }
+
+   return b;
+}
+
+vector<int> Rope::buildFibList(int len)
+{
+   int a = 0, b = 1, sum;
+   vector<int> result;
+   while (a <= len)
+   {
+      if (a > 0)
+      {
+         result.push_back(b);
+      }
+
+      sum = a + b;
+      a = b;
+      b = sum;
+   }
+   return result;
 }

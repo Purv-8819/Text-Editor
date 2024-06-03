@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <memory>
+#include <vector>
 #include "Node.h"
 
 using namespace std;
@@ -9,10 +12,11 @@ class Rope
 private:
    unique_ptr<Node> root;
 
-   void rebalance();
-   void addNode();
+   /// For balancing use
+   int fib(int n);
 
 public:
+   vector<int> buildFibList(int len);
    // Constructors
 
    // Default constructor - produces a rope representing the empty string
